@@ -1,0 +1,19 @@
+{
+  "name": "wemovie",
+  "version": "1.0.0",
+  "description": "基于nodejs的微信公众号开发,打造一个电影推荐系统",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1391020381/weMovie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1391020381/weMovie/issues"
+  },
+  "homepage": "https://github.com/1391020381/weMovie#readme"
+}
