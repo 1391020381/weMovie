@@ -14,7 +14,7 @@ const sha1 = require('sha1')
 const rawBody = require('raw-body')
 const Wechat = require('./wechat')
 const util = require('./util')
-module.exports = function (opts) {
+module.exports = function (opts, handler) {
   let wechat = new Wechat(opts)
   return async function (ctx, next) {
     const token = opts.token
@@ -34,7 +34,11 @@ module.exports = function (opts) {
         return false
       }
       let data = await rawBody(ctx.request, {length: ctx.length, limit: '1mb', encoding: ctx.charset})
-      let content = await  util.parseXMLAsync(content.xml)
+      let content = await  util.parseXMLAsync(data)
+      let message = util.formatMessage(content.xml)
+      ctx.weixin = message     // 挂在消息
+      await handler.call(this, next)   // 转到外层逻辑
+      wechat.replay.call(this)   // 真正回复
     }
   }
 }

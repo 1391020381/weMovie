@@ -20,6 +20,7 @@ function Wechat (opts) {
   this.fetchAccessToken()
 }
 
+// access_token——start
 Wechat.prototype.fetchAccessToken = function () {
   var that = this
   if (this.access_token && this.expires_in) { // 第一次获取access_token 时 Wechat构造函数中没有access_token 和expires_in ,此属性是在 fetchAccessToken中赋值的
@@ -67,6 +68,12 @@ Wechat.prototype.updateAccessToken = function () {
     })
   })
 }
+// access_token——end
 
+// 回复——start
 
+Wechat.prototype.replay = function () {
+
+}
+// 回复——end
 module.exports = Wechat
