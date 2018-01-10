@@ -5,7 +5,7 @@
 const fs = require('fs')
 const Promise = require('bluebird')  // node.js的Promise库
 const request = Promise.promisify(require('request'))
-
+const util = require('./util')
 const prefix = 'https://api.weixin.qq.com/cgi-bin/'
 
 const api = {
@@ -70,10 +70,15 @@ Wechat.prototype.updateAccessToken = function () {
 }
 // access_token——end
 
-// 回复——start
+// 发送消息——start
 
 Wechat.prototype.replay = function () {
-
+  let content = ctx.body
+  let message = ctx.weixin
+  let xml = util.tpl(content, message)
+  ctx.status = 200
+  ctx.type = 'application/xml'
+  ctx.body = xml
 }
-// 回复——end
+// 发送消息——end
 module.exports = Wechat
